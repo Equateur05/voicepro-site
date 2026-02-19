@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoicePro - Studio Mastering Professionnel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: #1A1D24;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 29, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 229, 208, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo-voice {
+            color: #00E5D0;
+        }
+
+        .logo-pro {
+            color: #6C5CE7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00E5D0;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 229, 208, 0.05) 0%, rgba(108, 92, 231, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .waveform-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.15;
+            background-image:
+                linear-gradient(90deg,
+                    transparent 0%,
+                    #00E5D0 25%,
+                    transparent 50%,
+                    #6C5CE7 75%,
+                    transparent 100%);
+            animation: waveflow 6s ease-in-out infinite;
+        }
+
+        @keyframes waveflow {
+            0%, 100% {
+                background-position: 0% center;
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #00E5D0 0%, #6C5CE7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0b3ba;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00E5D0 0%, #00d4c1 100%);
+            color: #1A1D24;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 229, 208, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 229, 208, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00E5D0;
+            padding: 1rem 2.5rem;
+            border: 2px solid #00E5D0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 229, 208, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Animated Wave */
+        .wave-visual {
+            margin-top: 3rem;
+            height: 60px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: linear-gradient(180deg, #00E5D0 0%, #6C5CE7 100%);
+            border-radius: 2px;
+            animation: waveAnimate 0.8s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 35px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 45px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 50px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { height: 45px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(7) { height: 35px; animation-delay: 0.6s; }
+        .wave-bar:nth-child(8) { height: 20px; animation-delay: 0.7s; }
+        .wave-bar:nth-child(9) { height: 10px; animation-delay: 0.8s; }
+
+        @keyframes waveAnimate {
+            0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #00E5D0 0%, #6C5CE7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(0, 229, 208, 0.05);
+            border: 1px solid rgba(0, 229, 208, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            background: rgba(0, 229, 208, 0.1);
+            border-color: rgba(0, 229, 208, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 229, 208, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00E5D0;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #b0b3ba;
+            font-weight: 600;
+        }
+
+        /* Export Formats */
+        .export-section {
+            background: rgba(108, 92, 231, 0.08);
+            border: 1px solid rgba(108, 92, 231, 0.2);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .export-formats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .format-badge {
+            background: rgba(0, 229, 208, 0.1);
+            border: 1px solid rgba(0, 229, 208, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #00E5D0;
+            font-size: 0.9rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .step::before {
+            content: attr(data-number);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #00E5D0 0%, #6C5CE7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1A1D24;
+            font-size: 1.2rem;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #00E5D0;
+        }
+
+        .step p {
+            color: #b0b3ba;
+            line-height: 1.6;
+        }
+
+        /* Premium Section */
+        .premium {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 229, 208, 0.1) 0%, rgba(108, 92, 231, 0.1) 100%);
+            border-top: 1px solid rgba(0, 229, 208, 0.1);
+            border-bottom: 1px solid rgba(0, 229, 208, 0.1);
+        }
+
+        .premium-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .premium-badge {
+            display: inline-block;
+            background: rgba(0, 229, 208, 0.15);
+            border: 1px solid rgba(0, 229, 208, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            color: #00E5D0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .premium h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00E5D0 0%, #6C5CE7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-highlight {
+            font-size: 1.8rem;
+            color: #00E5D0;
+            font-weight: 700;
+            margin: 2rem 0;
+        }
+
+        .pricing-highlight .currency {
+            font-size: 1.2rem;
+        }
+
+        .premium p {
+            color: #b0b3ba;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(0, 229, 208, 0.1);
+            padding: 3rem 2rem;
+            color: #808290;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #808290;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #00E5D0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(0, 229, 208, 0.1);
+            padding-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features {
+                padding: 4rem 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .premium {
+                padding: 4rem 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .export-formats {
+                gap: 1rem;
+            }
+
+            .format-badge {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-voice">VOICE</span><span class="logo-pro">PRO</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Caractéristiques</a></li>
+                    <li><a href="#pricing">Tarifs</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="/privacy">Confidentialité</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="waveform-bg"></div>
+        <div class="hero-content">
+            <h1>Studio Mastering professionnel en un tap</h1>
+            <p>Transformez vos enregistrements audio en productions de qualité studio</p>
+
+            <div class="hero-cta">
+                <a href="https://apps.apple.com/app/voicepro/id6759393043" class="btn-primary">Télécharger sur App Store</a>
+                <button class="btn-secondary">En savoir plus</button>
+            </div>
+
+            <div class="wave-visual">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Outils Professionnels</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎚️</div>
+                <p>HPF</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚪</div>
+                <p>Gate</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔇</div>
+                <p>De-Ess</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <p>EQ</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <p>Compress</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <p>LUFS</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <p>Warmth</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <p>Limiter</p>
+            </div>
+        </div>
+
+        <div class="export-section">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Formats d'Export</h3>
+            <p style="color: #b0b3ba;">Exportez dans vos formats préférés</p>
+            <div class="export-formats">
+                <div class="format-badge">WAV</div>
+                <div class="format-badge">MP3</div>
+                <div class="format-badge">AIFF</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2 class="section-title">Comment ça marche</h2>
+        <div class="steps">
+            <div class="step" data-number="1">
+                <h3>Importez</h3>
+                <p>Importez votre fichier audio directement depuis votre appareil. Supports pour tous les formats audio courants.</p>
+            </div>
+            <div class="step" data-number="2">
+                <h3>Masterisez</h3>
+                <p>Utilisez nos outils professionnels pour affiner votre son. Ajustez chaque paramètre avec précision.</p>
+            </div>
+            <div class="step" data-number="3">
+                <h3>Exportez</h3>
+                <p>Exportez dans WAV, MP3 ou AIFF. Partagez immédiatement sur vos plateformes préférées.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Section -->
+    <section class="premium" id="pricing">
+        <div class="premium-content">
+            <div class="premium-badge">Plan Premium</div>
+            <h2>Débloquez tout le potentiel</h2>
+            <p>3 essais gratuits • Pro à vie</p>
+            <div class="pricing-highlight">
+                <span class="currency">€</span>2,99
+            </div>
+            <a href="https://apps.apple.com/app/voicepro/id6759393043" class="btn-primary">Télécharger l'App</a>
+            <p style="margin-top: 2rem; font-size: 0.9rem;">Les achats in-app sont gérés par Apple. Consultez les conditions dans l'app.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>VoicePro</h4>
+                <ul>
+                    <li><a href="#features">Caractéristiques</a></li>
+                    <li><a href="#pricing">Tarifs</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Légal</h4>
+                <ul>
+                    <li><a href="/privacy">Politique de Confidentialité</a></li>
+                    <li><a href="mailto:charlesrocher75@gmail.com">Nous Contacter</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><a href="/support">FAQ</a></li>
+                    <li><a href="/support">Aide & Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VoicePro. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>
