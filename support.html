@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQ - VoicePro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: #1A1D24;
+            color: #ffffff;
+            line-height: 1.8;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 29, 36, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 229, 208, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo-voice {
+            color: #00E5D0;
+        }
+
+        .logo-pro {
+            color: #6C5CE7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00E5D0;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00E5D0 0%, #6C5CE7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #b0b3ba;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.5rem;
+            color: #00E5D0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 229, 208, 0.2);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: rgba(0, 229, 208, 0.05);
+            border: 1px solid rgba(0, 229, 208, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(0, 229, 208, 0.08);
+            border-color: rgba(0, 229, 208, 0.3);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #00E5D0;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            color: #00E5D0;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 229, 208, 0.02);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: #b0b3ba;
+            margin: 0;
+        }
+
+        .faq-answer ul {
+            padding: 0 1.5rem 1.5rem 2.5rem;
+            color: #b0b3ba;
+            margin: 0;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, rgba(0, 229, 208, 0.1) 0%, rgba(108, 92, 231, 0.1) 100%);
+            border: 1px solid rgba(0, 229, 208, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            color: #b0b3ba;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00E5D0 0%, #00d4c1 100%);
+            color: #1A1D24;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 229, 208, 0.3);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 229, 208, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #00E5D0;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #6C5CE7;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(0, 229, 208, 0.1);
+            padding: 3rem 2rem;
+            color: #808290;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+                margin-top: 70px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-question {
+                padding: 1rem;
+            }
+
+            .faq-answer p,
+            .faq-answer ul {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .faq-section h2 {
+                font-size: 1.2rem;
+            }
+
+            .faq-question h3 {
+                font-size: 0.95rem;
+            }
+
+            .faq-toggle {
+                font-size: 1.2rem;
+            }
+
+            .contact-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <span class="logo-voice">VOICE</span><span class="logo-pro">PRO</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/privacy">Confidentialité</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <a href="/" class="back-link">← Retour à l'accueil</a>
+
+        <h1>Support & FAQ</h1>
+        <p class="subtitle">Trouvez les réponses à vos questions sur VoicePro</p>
+
+        <!-- Getting Started Section -->
+        <section class="faq-section">
+            <h2>Prise en Main</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Comment fonctionne VoicePro ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>VoicePro est une application de mastering audio professionnel pour iOS. Voici comment l'utiliser :</p>
+                    <ul>
+                        <li><strong>Importez</strong> votre fichier audio depuis votre appareil</li>
+                        <li><strong>Utilisez</strong> les outils professionnels pour affiner votre son (HPF, Gate, De-Ess, EQ, Compresseur, LUFS, Warmth, Limiter)</li>
+                        <li><strong>Exportez</strong> votre fichier mastered en WAV, MP3 ou AIFF</li>
+                        <li><strong>Partagez</strong> votre audio sur vos plateformes préférées</li>
+                    </ul>
+                    <p style="padding: 1.5rem 1.5rem 0 1.5rem; margin: 0;">Tout le traitement audio se fait directement sur votre appareil, ce qui signifie que vos fichiers ne quittent jamais votre téléphone.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quels formats audio sont supportés ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>VoicePro supporte tous les formats audio courants pour l'importation, notamment :</p>
+                    <ul>
+                        <li>WAV</li>
+                        <li>MP3</li>
+                        <li>AIFF</li>
+                        <li>AAC</li>
+                        <li>M4A</li>
+                        <li>FLAC</li>
+                        <li>OGG</li>
+                    </ul>
+                    <p style="padding: 1.5rem 1.5rem 0 1.5rem; margin: 0;">Vous pouvez exporter uniquement en WAV, MP3 et AIFF pour une qualité optimale.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Export Section -->
+        <section class="faq-section">
+            <h2>Export & Partage</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Comment exporter mon audio ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Une fois que vous avez terminé le mastering de votre audio :</p>
+                    <ul>
+                        <li>Appuyez sur le bouton "Exporter"</li>
+                        <li>Choisissez votre format (WAV, MP3, ou AIFF)</li>
+                        <li>Pour MP3, sélectionnez votre débit binaire préféré</li>
+                        <li>Appuyez sur "Exporter" et sélectionnez où enregistrer le fichier</li>
+                        <li>Vous pouvez ensuite partager directement depuis l'app ou accéder au fichier depuis l'app Fichiers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quel format d'export devrais-je utiliser ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>WAV :</strong> Meilleure qualité, taille de fichier plus grande. Recommandé pour l'archivage et le traitement ultérieur.</p>
+                    <p><strong>MP3 :</strong> Compression avec perte, fichier plus petit. Parfait pour le partage en ligne et les réseaux sociaux.</p>
+                    <p><strong>AIFF :</strong> Qualité identique au WAV, format alternative. Idéal pour les workflows Pro Tools.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Puis-je partager directement depuis VoicePro ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Oui ! Après avoir exporté votre fichier, vous pouvez le partager directement via :</p>
+                    <ul>
+                        <li>Messages</li>
+                        <li>Mail</li>
+                        <li>Sauvegarde dans l'app Fichiers (pour accès à Dropbox, Google Drive, etc.)</li>
+                        <li>Copie vers d'autres applications</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Section -->
+        <section class="faq-section">
+            <h2>Plan Premium</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Combien coûte le plan Pro ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Le plan Pro de VoicePro coûte <strong>2,99 €</strong> pour un accès à vie.</p>
+                    <p>Cet achat unique vous donne accès illimité à tous les outils professionnels de mastering sans frais supplémentaires.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Comment débloquer le plan Pro ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Vous avez plusieurs options pour débloquer VoicePro Pro :</p>
+                    <ul>
+                        <li><strong>Essais gratuits :</strong> Vous avez accès à 3 essais gratuits pour tester tous les outils</li>
+                        <li><strong>Achat unique :</strong> Achetez le plan Pro à 2,99 € depuis l'app pour un accès permanent</li>
+                        <li><strong>Gestion des achats :</strong> Tous les achats in-app sont gérés par Apple et facturés à votre compte App Store</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Qu'est-ce qui est inclus dans le plan Pro ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Avec le plan Pro, vous avez accès à tous les outils professionnels :</p>
+                    <ul>
+                        <li>HPF (High-Pass Filter)</li>
+                        <li>Gate</li>
+                        <li>De-Ess</li>
+                        <li>EQ</li>
+                        <li>Compresseur</li>
+                        <li>LUFS Meter</li>
+                        <li>Warmth</li>
+                        <li>Limiter</li>
+                        <li>Exports illimités en WAV, MP3, AIFF</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Puis-je annuler mon achat ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Comme les achats in-app sont gérés par Apple, vous pouvez demander un remboursement directement via App Store. Apple généralement accepte les demandes de remboursement dans les 14 jours suivant l'achat.</p>
+                    <p>Pour plus d'informations, consultez <strong>App Store → Compte → Achats → Obtenir de l'aide</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Vous n'avez pas trouvé la réponse ?</h2>
+            <p>Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question ou suggestion.</p>
+            <a href="mailto:charlesrocher75@gmail.com" class="contact-link">Nous Contacter</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 VoicePro. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
